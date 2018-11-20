@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DatePickerºÍTimePickerŒ¦Ô’ºÐ</string>
+    <string name="time_picker_dialog">TimePickerDialog</string>
+    <string name="date_picker_dialog">DatePickerDialog</string>
+    <string name="player_draw">Ó‹•r½YÊø£¡</string>
+    <string name="player_dra">Ó‹•rÖÐ£¡</string>
+</resources>

@@ -1,0 +1,160 @@
+package com.datepickerandtimepickerdialog;
+
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.DialogInterface;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+import android.os.CountDownTimer;
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView mTxtResult;
+    private TextView gg;
+
+    private Handler mHandler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mTxtResult = (TextView)findViewById(R.id.txtResult);
+        gg = (TextView)findViewById(R.id.txtResulT);
+
+        Button btnTimePickerDlg = (Button) findViewById(R.id.btnTimePickerDlg);
+        Button btnDatePickerDlg = (Button) findViewById(R.id.btnDatePickerDlg);
+        mTxtResult = (TextView) findViewById(R.id.txtResult);
+
+        btnTimePickerDlg.setOnClickListener(btnTimePickerDlgOnClick);
+        btnDatePickerDlg.setOnClickListener(btnDatePickerDlgOnClick);
+    }
+
+
+    private Button.OnClickListener btnDatePickerDlgOnClick = new Button.OnClickListener() {
+        public void onClick(View v) {
+            mTxtResult.setText("");
+
+            Calendar now = Calendar.getInstance();
+
+            DatePickerDialog datePickerDlg = new DatePickerDialog(MainActivity.this,
+                    datePickerDlgOnDateSet,
+                    now.get(Calendar.YEAR),
+                    now.get(Calendar.MONTH),
+                    now.get(Calendar.DAY_OF_MONTH));
+            datePickerDlg.setTitle("選擇日期");
+            datePickerDlg.setMessage("請選擇適合您的日期");
+            datePickerDlg.setIcon(android.R.drawable.ic_dialog_info);
+            datePickerDlg.setCancelable(false);
+
+            datePickerDlg.show();
+        }
+    };
+
+
+    private DatePickerDialog.OnDateSetListener datePickerDlgOnDateSet = new DatePickerDialog.OnDateSetListener() {
+        public void onDateSet (DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            mTxtResult.setText("您選擇的日期是" +
+                    Integer.toString(year) + "年" +
+                    Integer.toString(monthOfYear + 1) + "月" +
+                    Integer.toString(dayOfMonth) + "日");
+        }
+    };
+
+    private View.OnClickListener btnTimePickerDlgOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            mTxtResult.setText("");
+
+            Calendar begin = Calendar.getInstance();
+
+            Calendar now = Calendar.getInstance();
+
+            TimePickerDialog timePickerDlg = new TimePickerDialog(MainActivity.this,
+                    timePickerDlgOnTimeSet,
+                    now.get(Calendar.HOUR_OF_DAY),
+                    now.get(Calendar.MINUTE),
+                    true);
+            timePickerDlg.setTitle("選擇時間");
+            timePickerDlg.setMessage("請選擇適合您的時間");
+            timePickerDlg.setIcon(android.R.drawable.ic_dialog_info);
+            timePickerDlg.setCancelable(false);
+
+            timePickerDlg.show();
+
+        }
+
+    };
+
+    private TimePickerDialog.OnTimeSetListener timePickerDlgOnTimeSet = new TimePickerDialog.OnTimeSetListener() {
+        public void onTimeSet (TimePicker view, int hourOfDay, final int minute) {
+
+                mTxtResult.setText("您選擇的時間是" +
+                        Integer.toString(hourOfDay) + "時" +
+                        Integer.toString(minute) + "分");
+
+                gg.setText("");
+                AlertDialog.Builder altDlgBldr = new AlertDialog.Builder(MainActivity.this);
+                altDlgBldr.setTitle("時間設定");
+                altDlgBldr.setMessage("請確認時間是否正確!!");
+                altDlgBldr.setIcon(android.R.drawable.ic_dialog_info);
+                altDlgBldr.setCancelable(false);
+                altDlgBldr.setPositiveButton("是",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                gg.setText(
+                                        "鬧鐘開始!");
+                                Calendar begin = Calendar.getInstance();
+
+                                int iDiffSec = minute - begin.get(Calendar.MINUTE);
+
+                                mHandler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(MainActivity.this, R.string.player_draw, Toast.LENGTH_LONG)
+                                                .show();
+                                    }
+                                }, iDiffSec*1000);
+
+                            }
+                        });
+
+                altDlgBldr.setNegativeButton("否",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                gg.setText(
+                                        "重新設定!");
+                            }
+                        });
+
+                altDlgBldr.show();
+
+                /* 另種計時法：
+                for (int i = 1; i <= iDiffSec; i++) {
+                    try {
+                        if (i == iDiffSec) {
+                            Toast.makeText(MainActivity.this, R.string.player_draw, Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                        Thread.sleep(1000); //1000為1秒
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                */
+            }
+    };
+}
