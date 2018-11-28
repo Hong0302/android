@@ -1,0 +1,366 @@
+6)	package com.activityreturndata;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class GameActivity extends AppCompatActivity {
+
+    private TextView mTxtResult;
+    private ImageView mImgViewComPlay;
+    //private ImageButton mImgBtnScissors, mImgBtnStone, mImgBtnPaper;
+    private ImageButton mImgBtnOne, mImgBtnTwo, mImgBtnThree, mImgBtnFour, mImgBtnFive, mImgBtnSix;
+    private Button mBtnOK, mBtnCancel;
+
+    // 新增統計遊戲局數和輸贏的變數
+    private int miCountSet = 0,
+            miCountPlayerWin = 0,
+            miCountComWin = 0,
+            miCountDraw = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+
+        mImgViewComPlay = (ImageView)findViewById(R.id.imgViewComPlay);
+        mTxtResult = (TextView)findViewById(R.id.txtResult);
+        //mImgBtnScissors = (ImageButton)findViewById(R.id.imgBtnScissors);
+        //mImgBtnStone = (ImageButton)findViewById(R.id.imgBtnStone);
+        //mImgBtnPaper = (ImageButton)findViewById(R.id.imgBtnPaper);
+        mImgBtnOne = (ImageButton)findViewById(R.id.imgBtnOne);
+        mImgBtnTwo = (ImageButton)findViewById(R.id.imgBtnTwo);
+        mImgBtnThree = (ImageButton)findViewById(R.id.imgBtnThree);
+        mImgBtnFour = (ImageButton)findViewById(R.id.imgBtnFour);
+        mImgBtnFive = (ImageButton)findViewById(R.id.imgBtnFive);
+        mImgBtnSix = (ImageButton)findViewById(R.id.imgBtnSix);
+
+        //mImgBtnScissors.setOnClickListener(imgBtnScissorsOnClick);
+       //mImgBtnStone.setOnClickListener(imgBtnStoneOnClick);
+        //mImgBtnPaper.setOnClickListener(imgBtnPaperOnClick);
+        mImgBtnOne.setOnClickListener(imgBtnOneOnClick);
+        mImgBtnTwo.setOnClickListener(imgBtnTwoOnClick);
+        mImgBtnThree.setOnClickListener(imgBtnThreeOnClick);
+        mImgBtnFour.setOnClickListener(imgBtnFourOnClick);
+        mImgBtnFive.setOnClickListener(imgBtnFiveOnClick);
+        mImgBtnSix.setOnClickListener(imgBtnSixOnClick);
+
+        mBtnOK = (Button)findViewById(R.id.btnOK);
+        mBtnCancel = (Button)findViewById(R.id.btnCancel);
+        mBtnOK.setOnClickListener(btnOKOnClick);
+        mBtnCancel.setOnClickListener(btnCancelOnClick);
+    }
+
+    private View.OnClickListener imgBtnOneOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 6){
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+        }
+    };
+
+    private View.OnClickListener imgBtnTwoOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 6){
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+        }
+    };
+
+    private View.OnClickListener imgBtnThreeOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 6) {
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+        }
+    };
+
+    private View.OnClickListener imgBtnFourOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+            else if (iComPlay == 6) {
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+        }
+    };
+
+    private View.OnClickListener imgBtnFiveOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+            else if (iComPlay == 6) {
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_lose));
+                miCountComWin++;
+            }
+        }
+    };
+
+    private View.OnClickListener imgBtnSixOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            // 決定電腦出拳.
+            int iComPlay = (int)(Math.random()*6 + 1);
+
+            miCountSet++;
+
+            // 1 – 剪刀, 2 – 石頭, 3 – 布.
+            if (iComPlay == 1) {
+                mImgViewComPlay.setImageResource(R.drawable.one);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 2) {
+                mImgViewComPlay.setImageResource(R.drawable.two);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 3){
+                mImgViewComPlay.setImageResource(R.drawable.three);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 4){
+                mImgViewComPlay.setImageResource(R.drawable.four);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 5){
+                mImgViewComPlay.setImageResource(R.drawable.five);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_win));
+                miCountPlayerWin++;
+            }
+            else if (iComPlay == 6) {
+                mImgViewComPlay.setImageResource(R.drawable.six);
+                mTxtResult.setText(getString(R.string.result) +
+                        getString(R.string.player_flat));
+                miCountDraw++;
+            }
+        }
+    };
+
+    private View.OnClickListener btnOKOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent it = new Intent();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("KEY_COUNT_SET", miCountSet);
+            bundle.putInt("KEY_COUNT_PLAYER_WIN", miCountPlayerWin);
+            bundle.putInt("KEY_COUNT_COM_WIN", miCountComWin);
+            bundle.putInt("KEY_COUNT_DRAW", miCountDraw);
+            it.putExtras(bundle);
+
+            setResult(RESULT_OK, it);
+            finish();
+        }
+    };
+
+    private View.OnClickListener btnCancelOnClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+    };
+}
